@@ -201,14 +201,8 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-2">
-            <button onclick="applyPreset('imagem')" class="text-xs sm:text-sm font-extrabold bg-amber-400 hover:bg-amber-300 text-slate-900 px-3 py-1.5 rounded-full shadow border-2 border-amber-600 transition flex items-center gap-1">
-                <span>📸</span> Cenário da Imagem (1.230 W)
-            </button>
             <button onclick="openConfigModal()" class="text-xs sm:text-sm font-extrabold bg-sky-600 hover:bg-sky-500 text-white px-3 py-1.5 rounded-full shadow border-2 border-sky-800 transition flex items-center gap-1">
                 <span>⚙️</span> Configurar Potências & Horas
-            </button>
-            <button onclick="openScenarioModal()" class="text-xs sm:text-sm font-extrabold bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-full shadow border-2 border-emerald-800 transition flex items-center gap-1">
-                <span>📊</span> Comparador & Missões
             </button>
             <button onclick="toggleSound()" id="soundBtn" class="text-xs sm:text-sm font-extrabold bg-white/90 hover:bg-white text-slate-700 px-3 py-1.5 rounded-full shadow border-2 border-slate-300 transition">
                 🔊 Som: ON
@@ -575,10 +569,10 @@
                             </div>
 
                             <!-- Botão interativo da Geladeira no canto superior direito da cozinha -->
-                            <button onclick="toggleFridgeBase()" id="fridgeBadgeBtn" title="Clique para incluir/excluir a Geladeira no cálculo" class="absolute top-2 right-2 z-10 bg-white/90 hover:bg-white text-slate-800 border border-slate-400 text-[11px] font-extrabold px-2 py-0.5 rounded-full shadow transition flex items-center gap-1">
+                            <div id="fridgeBadgeBtn" class="absolute top-2 right-2 z-10 bg-white/90 text-slate-800 border border-slate-400 text-[11px] font-extrabold px-2 py-0.5 rounded-full shadow flex items-center gap-1">
                                 <span>🧊 Geladeira:</span>
                                 <span id="fridgeStatusText" class="text-slate-600">Standby (0W)</span>
-                            </button>
+                            </div>
 
                             <svg class="w-full h-full" viewBox="0 0 380 260" preserveAspectRatio="xMidYMid slice">
                                 <!-- Parede e Azulejos -->
@@ -852,37 +846,27 @@
                         </div>
                     </div>
 
-                    <!-- CARD 5: DESAFIO DA ECONOMIA (VERDE) -->
-                    <div onclick="openScenarioModal()" class="challenge-card rounded-2xl p-3 text-white cursor-pointer hover:brightness-105 transition flex flex-col justify-between">
-                        <div class="flex items-center justify-center gap-2">
-                            <!-- Troféu Dourado SVG -->
-                            <svg class="w-8 h-8 shrink-0 drop-shadow" viewBox="0 0 40 40">
-                                <path d="M10,8 L30,8 L28,20 C28,26 12,26 12,20 Z" fill="#facc15" stroke="#a16207" stroke-width="2"/>
-                                <path d="M10,10 C4,10 4,18 11,18" fill="none" stroke="#facc15" stroke-width="3"/>
-                                <path d="M30,10 C36,10 36,18 29,18" fill="none" stroke="#facc15" stroke-width="3"/>
-                                <rect x="17" y="24" width="6" height="7" fill="#eab308" stroke="#a16207" stroke-width="1.5"/>
-                                <rect x="11" y="31" width="18" height="5" rx="2" fill="#ca8a04" stroke="#713f12" stroke-width="1.5"/>
+                    <!-- CARD 5: GELADEIRA -->
+                    <div class="card-control rounded-2xl p-2.5 sm:px-3.5 sm:py-2.5 flex items-center justify-between gap-2">
+                        <!-- Ícone Geladeira -->
+                        <div class="w-14 h-14 flex items-center justify-center shrink-0">
+                            <svg class="w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 60 60">
+                                <rect x="13" y="4" width="34" height="52" rx="4" fill="#e2e8f0" stroke="#475569" stroke-width="2.5"/>
+                                <rect x="16" y="7" width="28" height="15" rx="2" fill="#f8fafc"/>
+                                <line x1="13" y1="25" x2="47" y2="25" stroke="#475569" stroke-width="2.5"/>
+                                <rect x="39" y="11" width="3" height="9" rx="1.5" fill="#64748b"/>
+                                <rect x="39" y="30" width="3" height="15" rx="1.5" fill="#64748b"/>
+                                <circle id="fridgeControlLed" cx="20" cy="15" r="2" fill="#38bdf8"/>
                             </svg>
-                            <h3 class="title-font text-base sm:text-lg font-bold leading-tight text-amber-100 drop-shadow">
-                                Desafio da Economia
-                            </h3>
                         </div>
-
-                        <p class="text-center text-xs sm:text-sm font-extrabold text-white mt-1.5 leading-snug">
-                            Economize pelo menos <span class="text-yellow-300 underline">20% de energia!</span>
-                        </p>
-
-                        <!-- Barra de progresso da economia em relação ao Teto de Referência -->
-                        <div class="mt-2 bg-black/30 rounded-full h-4 p-0.5 overflow-hidden border border-emerald-300/40 relative">
-                            <div id="savingsProgressBar" class="bg-gradient-to-r from-yellow-400 to-lime-300 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
-                            <span id="savingsPercentLabel" class="absolute inset-0 flex items-center justify-center text-[10px] font-black text-white drop-shadow">
-                                Economia atual: 0%
-                            </span>
-                        </div>
-
-                        <div class="mt-1.5 flex items-center justify-between text-[11px] font-bold text-emerald-100">
-                            <span id="challengeStatusBadge">🎯 Meta: Reduzir ≥ 20%</span>
-                            <span class="underline text-yellow-200">Abrir Desafio →</span>
+                        <div class="flex flex-col items-center flex-1">
+                            <div class="flex items-center gap-1">
+                                <span class="title-font text-sm sm:text-base font-bold text-[#0f172a] leading-tight">Geladeira</span>
+                                <span id="powerBadge_fridge" class="text-[10px] font-extrabold bg-slate-200 text-slate-700 px-1.5 py-0.2 rounded">960W</span>
+                            </div>
+                            <button id="btn_fridge" onclick="toggleFridgeBase()" class="mt-1 w-28 sm:w-32 py-1 rounded-full text-white font-extrabold text-sm sm:text-base tracking-wide transition btn-pill-on">
+                                Ligada
+                            </button>
                         </div>
                     </div>
 
@@ -908,9 +892,6 @@
         <div class="bg-white/90 backdrop-blur-md border-2 border-emerald-700 rounded-2xl px-4 py-2 shadow-lg flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
             <div class="flex flex-wrap items-center gap-2">
                 <span class="font-black text-emerald-900">⚡ Cenários Rápidos:</span>
-                <button onclick="applyPreset('imagem')" class="bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold px-2.5 py-1 rounded-lg border border-amber-400 transition">
-                    Padrão da Imagem (1.230 W)
-                </button>
                 <button onclick="applyPreset('tudo_ligado')" class="bg-rose-100 hover:bg-rose-200 text-rose-900 font-bold px-2.5 py-1 rounded-lg border border-rose-400 transition">
                     🔥 Alto Consumo (Tudo Ligado)
                 </button>
@@ -1338,7 +1319,20 @@
                 }
             });
 
-            // Badge da Geladeira/Cozinha
+            // Atualizar o controle dedicado da Geladeira
+            const fridgeButton = document.getElementById('btn_fridge');
+            const fridgePowerBadge = document.getElementById('powerBadge_fridge');
+            const fridgeControlLed = document.getElementById('fridgeControlLed');
+            if (fridgePowerBadge) fridgePowerBadge.textContent = `${state.fridgeBasePower}W`;
+            if (fridgeButton) {
+                fridgeButton.textContent = state.fridgeBaseActive ? 'Ligada' : 'Desligada';
+                fridgeButton.className = state.fridgeBaseActive
+                    ? 'mt-1 w-28 sm:w-32 py-1 rounded-full text-white font-extrabold text-sm sm:text-base tracking-wide transition btn-pill-on'
+                    : 'mt-1 w-28 sm:w-32 py-1 rounded-full text-white font-extrabold text-sm sm:text-base tracking-wide transition btn-pill-off';
+            }
+            if (fridgeControlLed) fridgeControlLed.setAttribute('fill', state.fridgeBaseActive ? '#38bdf8' : '#94a3b8');
+
+            // Indicador de status da Geladeira na Cozinha
             const fridgeText = document.getElementById('fridgeStatusText');
             const fridgeLed = document.getElementById('fridgeLedPanel');
             if (state.fridgeBaseActive) {
@@ -1383,9 +1377,6 @@
 
             // 4. Atualizar Dica Inteligente Sustentável
             updateSmartTip(metrics);
-
-            // 5. Atualizar Barra do Desafio da Economia
-            updateChallengeProgress(metrics);
 
             // 6. Se o modal de comparação estiver aberto, atualiza em tempo real
             if (!document.getElementById('scenarioModal').classList.contains('hidden')) {
